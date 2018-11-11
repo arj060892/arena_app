@@ -1,32 +1,56 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import Login from './src/screens/Login';
-import Secured from './src/screens/Secured';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  ImageBackground,
+  Image,
+  TouchableHighlight,
+  Alert
+} from 'react-native';
 
-type Props = {};
-export default class App extends Component<Props> {
-  state = {
-    isLoggedIn: false
+const logo = require('./src/images/login-logo.png');
+const backgroundImage = require('./src/images/splash-bg.jpg');
+const getStarted = 'Get Started';
+export default class App extends Component {
+
+  button() {
+    Alert.alert(
+      'Alert Title',
+      'Alert message here...',
+      [
+        { text: 'Get Started', onPress: () => console.warn('NO Pressed'), style: 'cancel' },
+    ]
+    );
   }
 
   render() {
+    return (
+      <ImageBackground
+        source={backgroundImage}
+        style={{ width: '100%', height: '100%' }}
+      >
+        <View style={styles.container}>
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor="#4F6D7A"
+          />
 
-    if (this.state.isLoggedIn)
-      return <Secured
-        onLogoutPress={() => this.setState({ isLoggedIn: false })}
-      />;
-    else
-      return <Login
-        onLoginPress={() => this.setState({ isLoggedIn: true })}
-      />;
+          <Image source={logo} style={styles.logo} />
+
+
+          <TouchableHighlight onPress={() => this.button()}>
+            <Text style={styles.text}>
+              {getStarted}
+            </Text>
+          </TouchableHighlight>
+
+
+        </View>
+      </ImageBackground>
+    );
   }
 }
 
@@ -35,16 +59,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    fontFamily: 'Roboto',
   },
   welcome: {
-    fontSize: 20,
     textAlign: 'center',
-    margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  logo: {
+    width: 100,
+    height: 100,
+    marginBottom: '10%',
   },
+  text: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 50,
+    paddingRight: 50,
+    color: '#FFFFFF',
+    backgroundColor: '#188b0c',
+    borderRadius: 20,
+    fontWeight: 'bold',
+  }
 });
