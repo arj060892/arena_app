@@ -14,14 +14,25 @@ import {
 
 const logo = require('./src/images/login-logo.png');
 const backgroundImage = require('./src/images/splash-bg.jpg');
-const getStarted = 'Get Started';
-const Signup = 'Signup';
+const login = 'Login';
+const signup = 'Signup';
 export default class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { username: 'User Name', password: 'Password' };
+    this.state = { 
+      username: 'User Name',
+       password: 'Password',
+       isUsernameFocused: false,
+       isPasswordFocused: false,
+       };
   }
+  onFocusChangeUsername = () => {
+    this.setState({isUsernameFocused: true});
+}
+onFocusChangePassword = () => {
+    this.setState({isPasswordFocused: true});
+}
   button() {
     Alert.alert(
       'Alert Title',
@@ -34,52 +45,37 @@ export default class App extends Component {
 
   render() {
     return (
-      // <ImageBackground
-      //   source={backgroundImage}
-      //   style={{ width: '100%', height: '100%' }}
-      // >
       <View style={styles.container}>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor="#388e3c"
-        />
 
+        <StatusBar barStyle="light-content" backgroundColor="#388e3c"/>
         <Image source={logo} style={styles.logo} />
 
-
-        {/* <TouchableHighlight onPress={() => this.button()}>
-            <Text style={styles.text}>
-              {getStarted}
-            </Text>
-          </TouchableHighlight> */}
-
         <TextInput
-          style={styles.inputText}
-          onChangeText={(username) => this.setState({ username })}
-          value={this.state.username}
-        />
-        <TextInput
-          style={styles.inputText}
-          onChangeText={(password) => this.setState({ password })}
-          value={this.state.password}
+          placeholder={this.state.username}
+          onFocus={() => this.onFocusChangeUsername()}
+          style={(this.state.isUsernameFocused) ? styles.inputTextActive : styles.inputTextGrey}
         />
 
+        <TextInput
+          secureTextEntry={true}
+          onFocus={() => this.onFocusChangePassword()}
+          placeholder={this.state.password}
+          style={(this.state.isPasswordFocused) ? styles.inputTextActive : styles.inputTextGrey}
+        />
 
         <View style={{ flexDirection: 'row', width: '80%', marginTop: 20 }}>
           <View style={{ width: '50%' }} >
             <Text style={[styles.textButtonLight, styles.marginRight]}>
-              {Signup}
+              {signup}
             </Text>
           </View>
           <View style={{ width: '50%' }} >
             <Text style={[styles.text, styles.marginLeft]}>
-              {getStarted}
+              {login}
             </Text>
           </View>
         </View>
-
       </View>
-      // </ImageBackground>
     );
   }
 }
@@ -90,9 +86,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     fontFamily: 'Roboto',
-  },
-  welcome: {
-    textAlign: 'center',
   },
   logo: {
     width: 100,
@@ -117,12 +110,11 @@ const styles = StyleSheet.create({
     paddingRight: 30,
     color: '#767676',
     borderRadius: 20,
-    fontWeight: 'bold',
     borderColor: '#d4d4d4',
     borderWidth: 1,
     textAlign: 'center',
   },
-  inputText: {
+  inputTextGrey: {
     width: '90%',
     borderBottomColor: '#d4d4d4',
     borderBottomWidth: 1,
@@ -131,7 +123,17 @@ const styles = StyleSheet.create({
     color: '#d4d4d4',
     fontWeight: 'bold',
     fontSize: 18,
-  },
+},
+inputTextActive: {
+    width: '90%',
+    borderBottomColor: '#fe9a44',
+    borderBottomWidth: 1,
+    textAlign: 'center',
+    marginBottom: 24,
+    color: '#767676',
+    fontWeight: 'bold',
+    fontSize: 18,
+},
   marginLeft: {
     marginLeft: 10,
   },
