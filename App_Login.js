@@ -20,19 +20,19 @@ export default class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       username: 'User Name',
-       password: 'Password',
-       isUsernameFocused: false,
-       isPasswordFocused: false,
-       };
+      password: 'Password',
+      isUsernameFocused: false,
+      isPasswordFocused: false,
+    };
   }
   onFocusChangeUsername = () => {
-    this.setState({isUsernameFocused: true});
-}
-onFocusChangePassword = () => {
-    this.setState({isPasswordFocused: true});
-}
+    this.setState({ isUsernameFocused: true });
+  }
+  onFocusChangePassword = () => {
+    this.setState({ isPasswordFocused: true });
+  }
   button() {
     Alert.alert(
       'Alert Title',
@@ -47,22 +47,24 @@ onFocusChangePassword = () => {
     return (
       <View style={styles.container}>
 
-        <StatusBar barStyle="light-content" backgroundColor="#388e3c"/>
+        <StatusBar barStyle="light-content" backgroundColor="#388e3c" />
         <Image source={logo} style={styles.logo} />
 
-        <TextInput
-          placeholder={this.state.username}
-          onFocus={() => this.onFocusChangeUsername()}
-          style={(this.state.isUsernameFocused) ? styles.inputTextActive : styles.inputTextGrey}
-        />
+        <View style={styles.paddingHorizontal}>
+          <TextInput
+            placeholder={this.state.username}
+            onFocus={() => this.onFocusChangeUsername()}
+            style={(this.state.isUsernameFocused) ? styles.inputTextActive : styles.inputTextGrey}
+          />
 
-        <TextInput
-          secureTextEntry={true}
-          onFocus={() => this.onFocusChangePassword()}
-          placeholder={this.state.password}
-          style={(this.state.isPasswordFocused) ? styles.inputTextActive : styles.inputTextGrey}
-        />
-
+          <TextInput
+            secureTextEntry={true}
+            onFocus={() => this.onFocusChangePassword()}
+            placeholder={this.state.password}
+            style={(this.state.isPasswordFocused) ? styles.inputTextActive : styles.inputTextGrey}
+          />
+        </View>
+ 
         <View style={{ flexDirection: 'row', width: '80%', marginTop: 20 }}>
           <View style={{ width: '50%' }} >
             <Text style={[styles.textButtonLight, styles.marginRight]}>
@@ -113,9 +115,10 @@ const styles = StyleSheet.create({
     borderColor: '#d4d4d4',
     borderWidth: 1,
     textAlign: 'center',
+
   },
   inputTextGrey: {
-    width: '90%',
+    width: '100%',
     borderBottomColor: '#d4d4d4',
     borderBottomWidth: 1,
     textAlign: 'center',
@@ -123,21 +126,27 @@ const styles = StyleSheet.create({
     color: '#d4d4d4',
     fontWeight: 'bold',
     fontSize: 18,
-},
-inputTextActive: {
-    width: '90%',
+
+  },
+  inputTextActive: {
+    width: '100%',
     borderBottomColor: '#fe9a44',
     borderBottomWidth: 1,
     textAlign: 'center',
     marginBottom: 24,
     color: '#767676',
-    fontWeight: 'bold',
     fontSize: 18,
-},
+    fontWeight: 'normal',
+  },
   marginLeft: {
     marginLeft: 10,
   },
   marginRight: {
     marginRight: 10,
-  }
+  },
+  paddingHorizontal: {
+    width:'100%',
+    paddingHorizontal:32,
+  },
+
 });

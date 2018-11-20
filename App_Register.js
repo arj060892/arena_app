@@ -59,6 +59,8 @@ export default class App extends Component {
                     backgroundColor="#388e3c"
                 />
                 <Image source={profileImg} style={styles.profileImg} />
+                <View style={styles.paddingHorizontal}>
+                
                 <TextInput
                     onFocus={() => this.onFocusChangeName()}
                     placeholder={this.state.name}
@@ -76,6 +78,7 @@ export default class App extends Component {
                     placeholder={this.state.email}
                     style={(this.state.isEmailFocused) ? styles.inputTextActive : styles.inputTextGrey}
                 />
+                </View>
                 <View style={styles.bottom}>
                     <Text style={styles.submitText}>{submit}</Text>
                 </View>
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
         marginBottom: 24,
     },
     inputTextGrey: {
-        width: '90%',
+        width: '100%',
         borderBottomColor: '#d4d4d4',
         borderBottomWidth: 1,
         textAlign: 'center',
@@ -107,13 +110,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     inputTextActive: {
-        width: '90%',
+        width: '100%',
         borderBottomColor: '#fe9a44',
         borderBottomWidth: 1,
         textAlign: 'center',
         marginBottom: 24,
         color: '#767676',
-        fontWeight: 'bold',
+        fontWeight: 'normal',
         fontSize: 18,
     },
     bottom: {
@@ -132,6 +135,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 18,
         color: '#FFFFFF',
-    }
+    },
+    paddingHorizontal: {
+        width:'100%',
+        paddingHorizontal:32,
+      },
 
 });
